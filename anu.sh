@@ -8,7 +8,8 @@ set -e
 RAW_URL="https://raw.githubusercontent.com/gutssnv/patch_anim/main/AnimationUtils.java"
 TARGET_REL="frameworks/base/core/java/android/view/animation/AnimationUtils.java"
 
-TARGET="$ANDROID_ROOT/$TARGET_REL"
+TARGET="$ANDROID_BUILD_TOP/$TARGET_REL"
+BACKUP="$HOME/patch/AnimationUtils.java.bak"
 
 if [ ! -f "$TARGET" ]; then
     echo "[!] hey bastard, your $TARGET is missing!"
@@ -16,8 +17,8 @@ if [ ! -f "$TARGET" ]; then
 fi
 
 # Backup
-echo "[*] Backup -> ${TARGET}.bak"
-cp "$TARGET" "${TARGET}.bak"
+echo "[*] Backup -> $BACKUP"
+cp "$TARGET" "$BACKUP"
 
 # Replace
 echo "[*] replace the target! ..."
@@ -27,4 +28,4 @@ echo "[+] Done!:"
 echo "    $TARGET"
 echo ""
 echo "[i] revert?:"
-echo "    cp \"${TARGET}.bak\" \"$TARGET\""
+echo "    cp \"$BACKUP\" \"$TARGET\""
